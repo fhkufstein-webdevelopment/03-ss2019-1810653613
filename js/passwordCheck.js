@@ -33,15 +33,15 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     this.passwordField.onfocus = function () {
         that.check();
-    }
+    };
 
     this.passwordField.onkeyup = function () {
         that.check();
-    }
+    };
 
     this.passwordSubmitButton.onclick = function () {
         that.check();
-    }
+    };
 
     //TODO end
 
