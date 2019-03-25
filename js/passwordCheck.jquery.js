@@ -21,22 +21,22 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
     //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
 
-    this.passwordField.blur(function() {
+    this.passwordField.blur(function() { //nur blur anstatt onblur +function in Klammern
         //the keyword "this" is always referring to its context.
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
         //therefore we previously saved "this" in a variable called "that"
         that.check();
     });
 
-    this.passwordField.keydown(function() {
+    this.passwordField.keydown(function() { //anderer Name , kein on davor
         that.check();
     });
 
-    this.passwordField.focus(function() {
+    this.passwordField.focus(function() { //kein on davor
         that.check();
     });
 
-    this.passwordSubmitButton.click(function() {
+    this.passwordSubmitButton.click(function() { // " onclick" weggelassen
         that.check();
     });
 
@@ -52,13 +52,13 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
             //if it is long enough and has a special character - everything is fine
             if(longEnough && hasSpecialChars) {
                 this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass);
-                this.passwordSubmitButton.attr('disabled', false);
+                this.passwordSubmitButton.attr('disabled', false); //viel komplexere Umschreibung des Vergleichs ?
             } else if(!hasSpecialChars && longEnough) { //if it is long enough but it has no special character set class warning
                 this.wrapperField.removeClass(this.successClass + ' ' + this.errorClass).addClass(this.warningClass);
-                this.passwordSubmitButton.attr('disabled', true);
+                this.passwordSubmitButton.attr('disabled', true);//viel komplexere Umschreibung des Vergleichs ?
             } else { //if it is not long enough set class error
                 this.wrapperField.removeClass(this.warningClass + ' ' + this.successClass).addClass(this.errorClass);
-                this.passwordSubmitButton.attr('disabled', true);
+                this.passwordSubmitButton.attr('disabled', true);//viel komplexere Umschreibung des Vergleichs ?
             }
 
 
@@ -77,7 +77,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.checkForLength = function() {
         //@todo
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        return this.passwordField.value.length >= this.minLength; //this needs to be replaced!
     };
 
     /*
@@ -87,7 +87,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //@todo
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        var sonder = /[!§$_.:,;]/;
+        return sonder.test(this.passwordField.value); //this needs to be replaced!
     };
     //TODO 2 end
 }
